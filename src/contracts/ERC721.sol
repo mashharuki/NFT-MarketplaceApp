@@ -20,6 +20,17 @@ contract ERC721 {
             emit Transfer(address(0), to, tokenId);
       }
 
+      function balanceOf(address owner) public view returns(uint256) {
+            require( owner != address(0), 'owner query for non-exitst token');
+            return _OwnedTokensCount[owner];
+      }
+
+      function ownerOf(uint256 _tokenId) external view returns (address) {
+            address owner = _tokenOwner[_tokenId];
+            require( owner != address(0), 'owner query for non-exitst token');
+            return owner;
+      }
+
       function _exists(uint256 tokenId) internal view returns(bool) {
             address owner = _tokenOwner[tokenId];
             return owner != address(0);
