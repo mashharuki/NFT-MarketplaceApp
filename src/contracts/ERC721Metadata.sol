@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
-contract ERC721Metadata {
+import './interface/IERC721Metadata.sol';
+
+contract ERC721Metadata is IERC721Metadata {
 
       string private _name;
       string private _symbol;
@@ -11,11 +13,11 @@ contract ERC721Metadata {
             _symbol = symbolified;
       }
 
-      function name() external view returns (string memory) {
+      function name() external override view returns (string memory) {
             return _name;
       }
 
-      function symbol() external view returns (string memory) {
+      function symbol() external override view returns (string memory) {
             return _symbol;
       }
 }
