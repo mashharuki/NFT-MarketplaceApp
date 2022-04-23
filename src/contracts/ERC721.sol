@@ -13,6 +13,12 @@ contract ERC721 is ERC165, IERC721 {
       // 承認されたトークンIDとアドレスを紐づけるマップ
       mapping(uint256 => address) private _tokenApprovals;
 
+      // コンストラクター
+      constructor() {
+            // インターフェースのフィンガープリントを登録する。
+            _registerInterface(bytes4(keccak256("balanceOf(bytea4)")^keccak256("townerOf(bytes4)")^keccak256("transferFrom(bytes4)")));
+      }
+
       function _mint(address to, uint256 tokenId) internal virtual {
             require( to != address(0), 'ERC721: minting to the zero address');
             require(!_exists(tokenId), 'ERC721, token aleady minted');
