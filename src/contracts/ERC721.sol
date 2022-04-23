@@ -10,7 +10,7 @@ contract ERC721 {
       // 所有者と保有しているNFTの数を保有するマップ
       mapping(address => uint256) private _OwnedTokensCount;
 
-      function _mint(address to, uint256 tokenId) internal {
+      function _mint(address to, uint256 tokenId) internal virtual {
             require( to != address(0), 'ERC721: minting to the zero address');
             require(!_exists(tokenId), 'ERC721, token aleady minted');
 
