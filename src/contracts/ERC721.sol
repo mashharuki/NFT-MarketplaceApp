@@ -4,6 +4,7 @@ pragma solidity >=0.8.0;
 contract ERC721 {
       // event
       event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
+      event Approved(address indexed owner, address indexed approved, uint256 indexed tokenId);
 
       // トークンIDと所有者の紐付けマップ
       mapping(uint256 => address) private _tokenOwner;
@@ -35,7 +36,29 @@ contract ERC721 {
       }
 
       function transferFrom(address _from, address _to, uint256 _tokenId) public {
+            require(isApprovedOrOwner(msg.sender, _tokenId), 'ERROR - ERC721: approve caller is not owner nor approved for all');
             _transferFrom(_from, _to, _tokenId);
+      }
+
+      function approve(address _to, uint256 _tokenId) public {
+            address owner = ownerOf(_tokenId);
+            require(_to != owner, 'ERROR - approval to current owner');
+            require(msg.sender == owner, 'ERROR - Current caller is not the owner');
+
+            _tokenApprovals[_tokenId] = _to;
+            emit Approved(owner, _to, _tokenId);
+      }
+
+      // NFTの承認者か承認されたアドレスであることを確認する関数
+      function isApprovedOrOwner(address spender, uint256 tokenId) internal view returns(bool) {
+            require(_exists(tokenId), 'ERC721, token does not exist');
+            address owner = ownerOf(tokenId);
+            return (spender == owner || getApproved(tokenId) == spender);
+      }
+
+      // トークンIDに紐づく承認されたアドレスを取得するメソッド
+      function getApproved(uint256 tokenId) public view returns (address) {
+            return _tokenApprovals[tokenId];
       }
 
       function balanceOf(address owner) public view returns(uint256) {
