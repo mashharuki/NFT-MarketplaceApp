@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
-contract ERC721 {
-      // event
-      event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
-      event Approved(address indexed owner, address indexed approved, uint256 indexed tokenId);
+import './ERC165.sol';
+import './interface/IERC721.sol';
+
+contract ERC721 is ERC165, IERC721 {
 
       // トークンIDと所有者の紐付けマップ
       mapping(uint256 => address) private _tokenOwner;
@@ -35,7 +35,7 @@ contract ERC721 {
             emit Transfer(_from, _to, _tokenId);
       }
 
-      function transferFrom(address _from, address _to, uint256 _tokenId) public {
+      function transferFrom(address _from, address _to, uint256 _tokenId) override public {
             require(isApprovedOrOwner(msg.sender, _tokenId), 'ERROR - ERC721: approve caller is not owner nor approved for all');
             _transferFrom(_from, _to, _tokenId);
       }
@@ -46,7 +46,7 @@ contract ERC721 {
             require(msg.sender == owner, 'ERROR - Current caller is not the owner');
 
             _tokenApprovals[_tokenId] = _to;
-            emit Approved(owner, _to, _tokenId);
+            emit Approval(owner, _to, _tokenId);
       }
 
       // NFTの承認者か承認されたアドレスであることを確認する関数
@@ -61,12 +61,12 @@ contract ERC721 {
             return _tokenApprovals[tokenId];
       }
 
-      function balanceOf(address owner) public view returns(uint256) {
+      function balanceOf(address owner) public override view returns(uint256) {
             require( owner != address(0), 'owner query for non-exitst token');
             return _OwnedTokensCount[owner];
       }
 
-      function ownerOf(uint256 _tokenId) public view returns (address) {
+      function ownerOf(uint256 _tokenId) public override view returns (address) {
             address owner = _tokenOwner[_tokenId];
             require( owner != address(0), 'owner query for non-exitst token');
             return owner;
