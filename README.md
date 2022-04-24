@@ -44,3 +44,16 @@ NFTマーケットプレイスアプリを開発するリポジトリになり�
       > Final cost:          0.00522096 ETH
   ```
 
+### 画像データについて
+
+  <a href="https://imgbb.com/">imagebb</a>を利用しました。
+   
+  以下は、アップロードした画像
+
+  <a href="https://ibb.co/qmmWMg7"><img src="https://i.ibb.co/BTTrV6c/k1.png" alt="k1" border="0"></a>
+  <a href="https://ibb.co/9sBHp7H"><img src="https://i.ibb.co/nz4MwFM/k2.png" alt="k2" border="0"></a>
+  <a href="https://ibb.co/6WK05jY"><img src="https://i.ibb.co/z43Vwqs/k3.png" alt="k3" border="0"></a>
+  <a href="https://ibb.co/cNS1P70"><img src="https://i.ibb.co/Xzrb9v1/k4.png" alt="k4" border="0"></a>
+  <a href="https://ibb.co/bggjtJP"><img src="https://i.ibb.co/tMMwRX4/k5.png" alt="k5" border="0"></a>
+  <a href="https://ibb.co/QpWjrbH"><img src="https://i.ibb.co/8Ny46Kx/k6.png" alt="k6" border="0"></a>
+  <a href="https://ibb.co/THfgVhM"><img src="https://i.ibb.co/gD2R5gZ/k7.png" alt="k7" border="0"></a>
