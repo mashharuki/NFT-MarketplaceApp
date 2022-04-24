@@ -50,6 +50,7 @@ contract('KryotoBird', (accounts) => {
 
       describe('indexing', async() => {
             it('lists KryptoBirdz', async() => {
+                  // await contract.mint('https...1');
                   await contract.mint('https...2');
                   await contract.mint('https...3');
                   await contract.mint('https...4');
@@ -58,8 +59,9 @@ contract('KryotoBird', (accounts) => {
                   let result = [];
                   let KryptoBird;
 
-                  for(let i = 1; i < totalSupply; i++) {
-                        KryptoBird = await contract.Kryptobirdz(i - 1);
+                  for(let i = 1; i <= totalSupply; i++) {
+                        // コントラクトの配列要素にアクセス
+                        KryptoBird = await contract.KryptoBirdz(i - 1);
                         result.push(KryptoBird);
                   }
 
