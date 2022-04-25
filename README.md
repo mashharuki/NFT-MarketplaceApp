@@ -57,3 +57,6 @@ NFTマーケットプレイスアプリを開発するリポジトリになり�
   <a href="https://ibb.co/bggjtJP"><img src="https://i.ibb.co/tMMwRX4/k5.png" alt="k5" border="0"></a>
   <a href="https://ibb.co/QpWjrbH"><img src="https://i.ibb.co/8Ny46Kx/k6.png" alt="k6" border="0"></a>
   <a href="https://ibb.co/THfgVhM"><img src="https://i.ibb.co/gD2R5gZ/k7.png" alt="k7" border="0"></a>
+
+### マーケットプレイスのイメージ図
+  <img src="./assets/image.png" />

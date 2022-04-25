@@ -3,13 +3,16 @@ pragma solidity >=0.8.0;
 
 import './ERC165.sol';
 import './interface/IERC721.sol';
+import './libraries/Counters.sol';
 
 contract ERC721 is ERC165, IERC721 {
+      using SafeMath for uint256;
+      using Counters for Counters.Counter;
 
       // トークンIDと所有者の紐付けマップ
       mapping(uint256 => address) private _tokenOwner;
       // 所有者と保有しているNFTの数を保有するマップ
-      mapping(address => uint256) private _OwnedTokensCount;
+      mapping(address => Counters.Counter) private _OwnedTokensCount;
       // 承認されたトークンIDとアドレスを紐づけるマップ
       mapping(uint256 => address) private _tokenApprovals;
 
@@ -24,7 +27,7 @@ contract ERC721 is ERC165, IERC721 {
             require(!_exists(tokenId), 'ERC721, token aleady minted');
 
             _tokenOwner[tokenId] = to;
-            _OwnedTokensCount[to] += 1;
+            _OwnedTokensCount[to].increment();
             
             emit Transfer(address(0), to, tokenId);
       }
@@ -35,8 +38,8 @@ contract ERC721 is ERC165, IERC721 {
             require(ownerOf(_tokenId) == _from, 'ERROR - ERC721: Trying to transfer a token the address does not own!');
 
             _tokenOwner[_tokenId] = _to;
-            _OwnedTokensCount[_from] -= 1;
-            _OwnedTokensCount[_to] += 1;
+            _OwnedTokensCount[_from].decrement();
+            _OwnedTokensCount[_to].increment();
 
             emit Transfer(_from, _to, _tokenId);
       }
@@ -69,7 +72,7 @@ contract ERC721 is ERC165, IERC721 {
 
       function balanceOf(address owner) public override view returns(uint256) {
             require( owner != address(0), 'owner query for non-exitst token');
-            return _OwnedTokensCount[owner];
+            return _OwnedTokensCount[owner].current();
       }
 
       function ownerOf(uint256 _tokenId) public override view returns (address) {
