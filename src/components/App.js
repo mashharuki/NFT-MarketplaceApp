@@ -62,7 +62,7 @@ class App extends Component {
                   console.log("totalsupply:", this.state.totalSupply);
 
                   for(let i = 1; i <= totalSupply; i++) {
-                        const KryptoBird = await contract.methods.KryptoBirdz(i - 1).call;
+                        const KryptoBird = await contract.methods.KryptoBirdz(i - 1).call();
                         this.setState({
                               kryptoBirdz:[...this.state.kryptoBirdz, KryptoBird]
                         });
@@ -75,6 +75,7 @@ class App extends Component {
 
       // mint関数
       mint = (kryptoBird) => {
+            console.log("kryptoBird:", kryptoBird);
             this.state.contract.methods
                   .mint(kryptoBird)
                   .send({from: this.state.account})
@@ -133,7 +134,6 @@ class App extends Component {
                                                 <div>
                                                       <div>
                                                             <MDBCard className="token img" style={{maxWidth: '22rem'}}>
-                                                                  {console.log(kryptoBird)}
                                                                   <MDBCardImage src={kryptoBird} position="top" height='250rem' style={{marginRight: '4px'}} />
                                                                   <MDBCardBody>
                                                                         <MDBCardTitle>
